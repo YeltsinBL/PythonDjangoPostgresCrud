@@ -52,3 +52,46 @@ python manage.py runserver
 ```
 
 > Nota: Para visualizar `los datos ordenados` en el servidor de Django, se `agrega la clase Meta` en una de las clases creadas en `models.py` indicando el campo en que se ordenará. Si quieren ordenar descendente, solo agregar un `-` seguido del nombre del campo.
+
+## Conexión a Postgres mediante la Shell
+
+- Se tiene que estar dentro de la carpeta creada cuando usamos `django-admin`
+```s
+# Conectamos a la Shell de Django
+python manage.py shell
+
+# Indicamos qué modelo se usará 
+from core.models import Producto
+
+# Asignamos en una variable todos los datos
+productos = Producto.objects.all()
+
+# Recorremos la variable para mostrar los datos
+for producto in productos:
+    print(producto.nombre, producto.precio)
+## Doble enter para mostrar los datos
+
+# Obtener un solo dato
+producto_unico = Producto.objects.get(id=1)
+print(producto_unico.nombre, producto_unico.precio)
+
+# Filtrar datos cuyos productos menores a 10
+productos_baratos = Producto.objects.filter(precio__lt=100.00)
+for producto in productos_baratos:
+    print(producto.nombre, producto.precio)
+
+# Crear un nuevo datos
+from core.models import Cliente
+cliente = Cliente(nombre='Juan', email='juanp@gmail.com', telefono='1234560', direccion='ate 123')
+cliente.save()
+## Doble enter para guardar los datos
+
+# Eliminar un dato
+cliente = Cliente.objects.get(id=1)
+cliente.delete()
+
+# Modificar un dato
+cliente = Cliente.objects.get(id=3)
+cliente.direccion = 'Av Los Jazmines'
+cliente.save()
+```
