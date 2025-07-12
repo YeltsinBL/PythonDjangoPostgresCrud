@@ -94,4 +94,7 @@ cliente.delete()
 cliente = Cliente.objects.get(id=3)
 cliente.direccion = 'Av Los Jazmines'
 cliente.save()
+
+# Salir de la shell
+exit()
 ```
